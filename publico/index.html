@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .login{
+            *{
+                display: flex;
+            }
+            #botao{
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login">
+        <label for="login">Login:</label>
+        <input type="text" id="login">
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha">
+        <label for="senhaConfirmar">Confirmar Senha:</label>
+        <input type="password" id="senhaConfirmar">
+        <input id="botao" type="button" value="Criar Conta">
+        <p id="resultado"></p>
+    </div>
+    <script>
+        var resultado = document.querySelector("#resultado");
+        var botao = document.querySelector("#botao");
+        var login = document.querySelector("#login");
+        botao.addEventListener("click",enviar,false);
+        login.addEventListener("blur", function(){
+            verificarLog(login.value);
+        },false);
+
+        var entradas = document.querySelectorAll("input");
+        for(i = 0;i<entradas.length;i++){
+            entradas[i].addEventListener("keydown",function esconder(){
+                resultado.style.display = "none";
+            },false)
+        }
+        function errou(texto){
+            resultado.style.display = "block";
+            resultado.style.color = "red";
+            resultado.textContent = texto;
+        }
+        function enviar(){
+            let log = document.querySelector("#login").value;
+            let senha = document.querySelector("#senha").value;
+            let senha2 = document.querySelector("#senhaConfirmar").value;
+            if(verificarLog(log)==true && verificarSenha(senha, senha2)==true && maiuscula(senha)==true && minuscula(senha)==true && charEspecial(senha)==true){
+                resultado.textContent = "conta criada com sucesso";
+                resultado.style.color = "black";
+                resultado.style.display = "block";
+            }
+        }
+        function verificarLog(log){
+            if(log.length>=8){
+                return true;
+            }
+            else {
+                errou("login precisa conter no mínimo 8 caracteres");
+                return false;
+            }
+        }
+        function verificarSenha(senha, senha2){
+            if((senha===senha2 && senha.length>=8)){
+                return true;
+            }
+            else{
+                if(senha!=senha2){
+                    errou("senhas não são iguais");
+                }
+                else{
+                    errou("a senha precisa conter pelo menos 8 caracteres");
+                }
+                return false;
+            }
+        }
+        function maiuscula(senha){
+            valor = false
+            for(i=0;i<senha.length;i++){
+                codigo = senha[i].charCodeAt(0);
+                if(codigo>=65&&codigo<=90){
+                    valor = true;
+                }
+            }
+            if(valor==false){
+                errou("a senha precisa conter pelo menos 1 caractere maiusculo");
+            }
+            return valor;
+        }
+        function minuscula(senha){
+            valor = false
+            for(i=0;i<senha.length;i++){
+                codigo = senha[i].charCodeAt(0);
+                if(codigo>=97&&codigo<=122){ 
+                    valor = true;
+                }
+            }
+            if(valor==false){
+                errou("a senha precisa conter pelo menos 1 caractere minusculo");
+            }
+            return valor;
+        }
+        function charEspecial(senha){
+            let regex = /[^a-zA-Z0-9\s]/;
+            if(regex.test(senha)==false){
+                errou("a senha precisa conter pelo menos 1 caractere especial");
+            }
+            return regex.test(senha);
+        }
+    </script>
+</body>
+</html>

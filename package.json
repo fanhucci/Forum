@@ -1,0 +1,33 @@
+{
+  "name": "forum",
+  "version": "1.0.0",
+  "description": "Atividade 2 - Manipulação de dados de formulário HTML",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fanhucci/Forum.git"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "HTPP",
+    "GET",
+    "programação",
+    "cliente",
+    "servidor"
+  ],
+  "author": "Felipe Ahucci",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fanhucci/Forum/issues"
+  },
+  "homepage": "https://github.com/fanhucci/Forum#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
